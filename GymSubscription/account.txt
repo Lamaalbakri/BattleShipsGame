@@ -1,7 +1,0 @@
-*1111212223
-Name:Lama
-Phone number:0532343321
-Gender:Female
-Subscription Type:6 months
-Classes:Boxing
-Price:1050
