@@ -1,10 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author Group 5
+ *  Design Patterns Project
+ */
 
-public class MainMenu 
+public class MainMenu
 {
-    public MainMenu() {
+    public MainMenu(){
         List<String> menuOptions = new ArrayList<>();
         ConsoleView consoleView = new ConsoleView();
         ConsoleInput consoleInput = new ConsoleInput();
@@ -16,14 +21,17 @@ public class MainMenu
         executeOrder(consoleInput.chooseMenuOption());
     }
 
-    public void executeOrder(int i) {
-        switch (i) {
-            case 1: {
-                Game game = new Game();
+    public void executeOrder(int i){
+        switch(i){
+            case 1:
+                Game game = Game.getGame();
                 game.startGame();
-            }
-            case 2: System.exit(0);
-            default: throw new IllegalStateException("Unexpected value: " + i);
+                break;
+            case 2:
+                System.exit(0);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + i);
         }
     }
 }

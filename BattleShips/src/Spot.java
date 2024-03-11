@@ -1,4 +1,8 @@
-
+/**
+ *
+ * @author Group 5
+ *  Design Patterns Project
+ */
 
 public class Spot
 {
@@ -6,33 +10,33 @@ public class Spot
     private char sign;
     private ShipPart shipPart;
 
-    public Spot() {
+    public Spot(){
         this.empty = true;
         this.sign = ' ';
         this.shipPart = null;
     }
 
-    public boolean isEmpty() {
+    public boolean isEmpty(){
         return empty;
     }
 
-    public void setEmpty(boolean empty) {
+    public void setEmpty(boolean empty){
         this.empty = empty;
     }
 
-    public char getSign() {
+    public char getSign(){
         return sign;
     }
 
-    public void setMissSign() {
+    public void setMissSign(){
         this.sign = '0';
     }
 
-    public void setShipPart(ShipPart shipPart) {
+    public void setShipPart(ShipPart shipPart){
         this.shipPart = shipPart;
     }
 
-    public ShipPart getShipPart() {
+    public ShipPart getShipPart(){
         return shipPart;
     }
 }

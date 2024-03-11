@@ -1,30 +1,42 @@
 import java.util.List;
 
-
+/**
+ *
+ * @author Group 5
+ *  Design Patterns Project
+ */
 
 public class Game
 {
+    private static Game game = null;
     private final Player player1;
     private final Player player2;
     private boolean gameIsRunning;
     private final ConsoleView consoleView;
     private final ConsoleInput consoleInput;
 
-    public Game() {
+    private Game(){ // Private constructor
         player1 = new Player(1);
         player2 = new Player(2);
         gameIsRunning = true;
         consoleView = new ConsoleView();
         consoleInput = new ConsoleInput();
     }
-
-    public void startGame() {
+    // This method returns an instance of the 'Game' class
+    public static Game getGame(){
+        if(game == null){
+            game = new Game(); // Creates a new instance 
+        }
+        return game;
+    }
+    
+    public void startGame(){
         //Set Ships for players
         playerSetsShips(player1);
         playerSetsShips(player2);
 
         Player player = player1;
-        while (gameIsRunning) {
+        while(gameIsRunning){
             Coordinates coordinates;
             Board enemyBoard = getAnotherPlayer(player).getPlayerBoard();
             Board playerBoard = player.getPlayerBoard();
@@ -35,11 +47,12 @@ public class Game
             consoleView.printBoard(playerBoard);
             consoleView.printBoard(shootingBoard);
             coordinates = consoleInput.getCoordinates();
-            if (enemyBoard.isHit(coordinates)) {
+            if(enemyBoard.isHit(coordinates)){
                 enemyBoard.getSpot(coordinates).getShipPart().markAsHit();
                 enemyPlayer.checkPlayerShips();
                 shootingBoard.markHit(coordinates, enemyBoard);
-            } else {
+            } 
+            else{
                 shootingBoard.markMiss(coordinates);
             }
 
@@ -49,24 +62,25 @@ public class Game
                 consoleView.printBoard(shootingBoard);
                 consoleInput.pressAnyKeyToContinue();
                 player = getAnotherPlayer(player);
-            } else {
+            } 
+            else{
                 consoleView.printBoard(shootingBoard);
                 consoleView.printCongratulations(player);
             }
         }
     }
 
-    private void doesEnemyLose(Player enemyPlayer) {
+    private void doesEnemyLose(Player enemyPlayer){
         if(enemyPlayer.getShips().isEmpty()){
             gameIsRunning = false;
         }
     }
 
-    private Player getAnotherPlayer(Player player) {
+    private Player getAnotherPlayer(Player player){
         return player.equals(player1) ? player2 : player1;
     }
 
-    private void playerSetsShips(Player player) {
+    private void playerSetsShips(Player player){
         Coordinates coordinates;
         Orientation orientation;
         List<Spot> validSpots;

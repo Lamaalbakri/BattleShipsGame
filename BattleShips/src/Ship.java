@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author Group 5
+ *  Design Patterns Project
+ */
 
 public abstract class Ship
 {
@@ -9,34 +14,34 @@ public abstract class Ship
     private final List<ShipPart> shipParts;
 
 
-    public Ship(int size) {
+    public Ship(int size){
         this.size = size;
         this.sunk = false;
         this.shipParts = new ArrayList<>();
     }
 
-    public int getSize() {
+    public int getSize(){
         return size;
     }
 
-    public void setShipParts(List<Spot> spots) {
-        for (Spot spot : spots) {
+    public void setShipParts(List<Spot> spots){
+        for(Spot spot : spots){
             ShipPart shipPart = new ShipPart();
             shipParts.add(shipPart);
             spot.setShipPart(shipPart);
         }
     }
 
-    public void checkShipPartStatus() {
-        if (shipParts.stream().noneMatch(part -> (part.getStatus().equals(ShipPartStatus.ALIVE)))) {
-            for (ShipPart part : shipParts) {
+    public void checkShipPartStatus(){
+        if(shipParts.stream().noneMatch(part -> (part.getStatus().equals(ShipPartStatus.ALIVE)))){
+            for(ShipPart part : shipParts){
                 part.markAsSunk();
             }
             this.sunk = true;
         }
     }
 
-    public boolean isSunk() {
+    public boolean isSunk(){
         return sunk;
     }
 }

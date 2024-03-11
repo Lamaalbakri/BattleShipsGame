@@ -1,4 +1,8 @@
-
+/**
+ *
+ * @author Group 5
+ *  Design Patterns Project
+ */
 
 public class ShipPart
 {
@@ -6,26 +10,26 @@ public class ShipPart
     private char sign;
 
 
-    public ShipPart() {
+    public ShipPart(){
         this.status = ShipPartStatus.ALIVE;
         this.sign = '@';
     }
 
-    public void markAsHit() {
+    public void markAsHit(){
         status = ShipPartStatus.HIT;
         sign = '!';
     }
 
-    public void markAsSunk() {
+    public void markAsSunk(){
         this.status = ShipPartStatus.SUNK;
         this.sign = 'X';
     }
 
-    public ShipPartStatus getStatus() {
+    public ShipPartStatus getStatus(){
         return status;
     }
 
-    public char getSign() {
+    public char getSign(){
         return sign;
     }
 }
