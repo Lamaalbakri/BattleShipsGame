@@ -18,7 +18,6 @@ public class ConsoleInput
     
     public Coordinates getCoordinates(){
         String chosenCoordinates;
-        Scanner scanner = new Scanner(System.in);
         do{
             consoleView.askForCoordinates();
             chosenCoordinates = scanner.next();
@@ -41,7 +40,6 @@ public class ConsoleInput
     }
 
     public Orientation getOrientation(){
-        Scanner scanner = new Scanner(System.in);
         int chosenOrientation = scanner.nextInt();
         switch(chosenOrientation){
             case 1:
@@ -54,11 +52,7 @@ public class ConsoleInput
                 return Orientation.WEST;
         }
     }
-
-    public int chooseMenuOption(){
-        return scanner.nextInt();
-    }
-
+    
     public void pressAnyKeyToContinue(){
         consoleView.printMessage("Press Enter key to continue...");
         try{

@@ -1,4 +1,3 @@
-import java.util.List;
 
 /**
  *
@@ -39,12 +38,6 @@ public class ConsoleView
     public void askForOrientation(){
         System.out.println("Choose orientation!");
         System.out.println("1 - NORTH, 2 - EAST, 3 - SOUTH, 4/DEFAULT - WEST");
-    }
-
-    public void printMenu(List<String> menuOptions){
-        for(int i = 0; i < menuOptions.size(); i++){
-            System.out.println(i + 1 + ". " + menuOptions.get(i));
-        }
     }
 
     public void askForCoordinates(){
