@@ -1,1 +1,1 @@
-Software Design Patterns Project.
+Software Design Patterns Project
