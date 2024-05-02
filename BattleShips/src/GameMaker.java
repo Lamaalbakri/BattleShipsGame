@@ -5,7 +5,7 @@
  *  Design Patterns Project
  */
 
-// Facade class
+// Facade Class
 public class GameMaker
 {
     private Game game;
