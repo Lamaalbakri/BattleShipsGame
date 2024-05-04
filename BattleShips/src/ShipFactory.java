@@ -5,6 +5,7 @@
  */
 
 // ShipFactory class that implements a factory method pattern.
+
 public class ShipFactory 
 {
     public Ship getShip(String shipType)
