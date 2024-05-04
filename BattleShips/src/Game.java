@@ -15,12 +15,12 @@ public class Game
     private final ConsoleView consoleView;
     private final ConsoleInput consoleInput;
 
-    private Game(){ // Private constructor
-        player1 = new Player(1);
-        player2 = new Player(2);
-        gameIsRunning = true;
+    private Game(){
         consoleView = new ConsoleView();
         consoleInput = new ConsoleInput();
+        player1 = new Player(1, consoleInput);
+        player2 = new Player(2, consoleInput);
+        gameIsRunning = true;
     }
     // This method returns an instance of the 'Game' class
     public static Game getGame(){

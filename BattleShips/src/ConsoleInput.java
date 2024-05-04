@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -37,6 +39,17 @@ public class ConsoleInput
                 return new Coordinates(row, col - 1);
         }
         return new Coordinates(0, 0);
+    }
+    
+    public String getShipType(){
+        System.out.println("Enter the type of ship: (Carrier, Battleship, Cruiser, Submarine, Destroyer)");
+        String shipType = scanner.nextLine().trim();
+        List<String> validTypes = Arrays.asList("Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer");
+        while (!validTypes.contains(shipType)) {
+            System.out.println("Invalid ship type. Please enter a valid type:");
+            shipType = scanner.nextLine().trim();
+        }
+        return shipType;
     }
 
     public Orientation getOrientation(){

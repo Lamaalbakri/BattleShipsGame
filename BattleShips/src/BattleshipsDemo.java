@@ -1,19 +1,15 @@
-
 import java.util.Scanner;
-
 
 /**
  *
  * @author Group 5
  *  Design Patterns Project
- */
+*/
 
 public class BattleshipsDemo
 {
     public static void main(String[] args)
-    {
-        GameMaker gameMaker = new GameMaker();
-        
+    {        
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n >>> WELCOME TO BATTLESHIPS GAME <<<" + 
                 "\n1. Start Game" +
@@ -22,6 +18,7 @@ public class BattleshipsDemo
         
         switch(choice){
             case 1:
+                GameMaker gameMaker = new GameMaker();
                 gameMaker.startGame();
                 break;
             case 2:

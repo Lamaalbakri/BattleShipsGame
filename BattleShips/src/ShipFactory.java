@@ -8,7 +8,7 @@
 public class ShipFactory 
 {
     public Ship getShip(String shipType)
-    {
+    {  
         if(shipType.equals("Battleship")){
             return new Battleship();
         }

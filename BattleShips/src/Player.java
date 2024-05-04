@@ -16,15 +16,15 @@ public class Player
     private final ShipFactory shipFactory;
     private final int id;
 
-    public Player(int id){
+    public Player(int id, ConsoleInput consoleInput){
+        this.id = id;
         ships = new ArrayList<>();
-        shipFactory = new ShipFactory(); // Initializes the shipFactory variable by creating a new instance of the 'ShipFactory' class.
+        shipFactory = new ShipFactory();
         playerBoard = new Board();
         shootingBoard = new Board();
-        this.id = id;
-        assignShips();
+        assignShips(consoleInput);  // Pass the ConsoleInput object to the method
     }
-
+    
     public void placeShip(Ship ship, List<Spot> validSpots){
         if (validSpots.size() == ship.getSize()) {
             ship.setShipParts(validSpots);
@@ -71,11 +71,11 @@ public class Player
       This method uses the factory pattern to create ship objects using the shipFactory instance
       and adds them to a collection called ships.
     */
-    private void assignShips(){ 
-        this.ships.add(shipFactory.getShip("Carrier")); // size 5
-        this.ships.add(shipFactory.getShip("Battleship")); // size 4
-        this.ships.add(shipFactory.getShip("Cruiser")); // size 3
-        this.ships.add(shipFactory.getShip("Submarine")); // size 3
-        this.ships.add(shipFactory.getShip("Destroyer")); // size 2
+    private void assignShips(ConsoleInput input){
+        System.out.println("\n>> Player " + id + ", please select your ships.");
+        for (int i = 0; i < 5; i++) {  // Assuming there are 5 ships to be assigned
+            String shipType = input.getShipType();
+            this.ships.add(shipFactory.getShip(shipType));
+        }
     }
 }
