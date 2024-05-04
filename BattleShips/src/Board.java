@@ -6,7 +6,6 @@ import java.util.List;
  * @author Group 5
  *  Design Patterns Project
  */
-
 public class Board
 { 
     private final Spot[][] spotArray;

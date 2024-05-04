@@ -5,7 +5,6 @@ import java.util.Scanner;
  * @author Group 5
  *  Design Patterns Project
 */
-
 public class BattleshipsDemo
 {
     public static void main(String[] args)

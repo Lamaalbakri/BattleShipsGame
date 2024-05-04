@@ -6,7 +6,6 @@ import java.util.List;
  * @author Group 5
  *  Design Patterns Project
  */
-
 public abstract class Ship
 {
     private final int size;

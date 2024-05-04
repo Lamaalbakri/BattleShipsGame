@@ -3,7 +3,6 @@
  * @author Group 5
  *  Design Patterns Project
  */
-
 public class SpotFlyweight
 {
     private final char sign;

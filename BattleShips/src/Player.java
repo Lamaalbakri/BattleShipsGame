@@ -7,7 +7,6 @@ import java.util.NoSuchElementException;
  * @author Group 5
  *  Design Patterns Project
  */
-
 public class Player
 {
     private final List<Ship> ships;

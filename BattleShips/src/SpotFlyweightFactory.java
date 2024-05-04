@@ -5,7 +5,6 @@ import java.util.HashMap;
  * @author Group 5
  *  Design Patterns Project
  */
-
 public class SpotFlyweightFactory
 {
     private static final HashMap<Character, SpotFlyweight> signs = new HashMap<>();
