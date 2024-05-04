@@ -6,12 +6,12 @@
 public class Spot
 {
     private boolean empty;
-    private char sign;
     private ShipPart shipPart;
+    private SpotFlyweight sign;
 
     public Spot(){
         this.empty = true;
-        this.sign = ' ';
+        this.sign = SpotFlyweightFactory.getSpotSign(' '); 
         this.shipPart = null;
     }
 
@@ -24,11 +24,12 @@ public class Spot
     }
 
     public char getSign(){
-        return sign;
+        return sign.getSign();
     }
 
+    // Set the sign of this spot to '0' using the flyweight factory
     public void setMissSign(){
-        this.sign = '0';
+        this.sign = SpotFlyweightFactory.getSpotSign('0');
     }
 
     public void setShipPart(ShipPart shipPart){
