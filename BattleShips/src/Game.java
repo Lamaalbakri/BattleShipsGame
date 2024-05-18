@@ -5,7 +5,7 @@ import java.util.List;
  * @author Group 5
  *  Design Patterns Project
  */
-public class Game
+public class Game 
 {
     private static Game game = null;
     private final Player player1;
@@ -13,73 +13,75 @@ public class Game
     private boolean gameIsRunning;
     private final ConsoleView consoleView;
     private final ConsoleInput consoleInput;
+    private Command currentCommand;
+    private Player currentPlayer;
 
-    private Game(){
+    private Game() {
         consoleView = new ConsoleView();
         consoleInput = new ConsoleInput();
         player1 = new Player(1, consoleInput);
         player2 = new Player(2, consoleInput);
         gameIsRunning = true;
+        currentPlayer = player1; // Initialize the current player
     }
-    // This method returns an instance of the 'Game' class
-    public static Game getGame(){
-        if(game == null){
-            game = new Game(); // Creates a new instance 
+
+    public static Game getGame() {
+        if (game == null) {
+            game = new Game(); // Creates a new instance
         }
         return game;
     }
-    
-    public void startGame(){
-        //Set Ships for players
+
+    public void startGame() {
+        // Set Ships for players
         playerSetsShips(player1);
         playerSetsShips(player2);
 
-        Player player = player1;
-        while(gameIsRunning){
+        while (gameIsRunning) {
             Coordinates coordinates;
-            Board enemyBoard = getAnotherPlayer(player).getPlayerBoard();
-            Board playerBoard = player.getPlayerBoard();
-            Board shootingBoard = player.getShootingBoard();
-            Player enemyPlayer = getAnotherPlayer(player);
+            Board enemyBoard = getAnotherPlayer(currentPlayer).getPlayerBoard();
+            Board playerBoard = currentPlayer.getPlayerBoard();
+            Board shootingBoard = currentPlayer.getShootingBoard();
+            Player enemyPlayer = getAnotherPlayer(currentPlayer);
 
-            consoleView.printMessage(player.toString());
+            consoleView.printMessage(currentPlayer.toString());
             consoleView.printBoard(playerBoard);
             consoleView.printBoard(shootingBoard);
             coordinates = consoleInput.getCoordinates();
-            if(enemyBoard.isHit(coordinates)){
-                enemyBoard.getSpot(coordinates).getShipPart().markAsHit();
-                enemyPlayer.checkPlayerShips();
-                shootingBoard.markHit(coordinates, enemyBoard);
-            } 
-            else{
-                shootingBoard.markMiss(coordinates);
-            }
 
-            doesEnemyLose(enemyPlayer);
-            if(gameIsRunning){
+            Command shootCommand = new ShootCommand(enemyPlayer, coordinates, enemyBoard, shootingBoard, currentPlayer);
+            executeCommand(shootCommand);
+
+            if (gameIsRunning) {
                 consoleView.printBoard(playerBoard);
                 consoleView.printBoard(shootingBoard);
                 consoleInput.pressAnyKeyToContinue();
-                player = getAnotherPlayer(player);
-            } 
-            else{
+                currentPlayer = getAnotherPlayer(currentPlayer);
+            } else {
                 consoleView.printBoard(shootingBoard);
-                consoleView.printCongratulations(player);
+                consoleView.printCongratulations(currentPlayer);
             }
         }
     }
 
-    private void doesEnemyLose(Player enemyPlayer){
-        if(enemyPlayer.getShips().isEmpty()){
+    public void executeCommand(Command command) {
+        currentCommand = command;
+        currentCommand.execute();
+        // Check if the enemy player has lost after executing the command
+        doesEnemyLose(getAnotherPlayer(currentPlayer));
+    }
+
+    private void doesEnemyLose(Player enemyPlayer) {
+        if (enemyPlayer.getShips().isEmpty()) {
             gameIsRunning = false;
         }
     }
 
-    private Player getAnotherPlayer(Player player){
+    private Player getAnotherPlayer(Player player) {
         return player.equals(player1) ? player2 : player1;
     }
 
-    private void playerSetsShips(Player player){
+    private void playerSetsShips(Player player) {
         Coordinates coordinates;
         Orientation orientation;
         List<Spot> validSpots;
@@ -92,9 +94,20 @@ public class Game
             consoleView.askForOrientation();
             orientation = consoleInput.getOrientation();
             validSpots = player.getPlayerBoard().getSpotsForShip(ship.getSize(), orientation, coordinates);
-            player.placeShip(ship, validSpots);
+
+            Command placeShipCommand = new PlaceShipCommand(player, ship, validSpots);
+            executeCommand(placeShipCommand);
         }
+
         consoleView.printBoard(player.getPlayerBoard());
         consoleInput.pressAnyKeyToContinue();
+    }
+
+    public boolean isGameRunning() {
+        return gameIsRunning;
+    }
+
+    public void setGameIsRunning(boolean gameIsRunning) {
+        this.gameIsRunning = gameIsRunning;
     }
 }

@@ -6,7 +6,7 @@
 public class Carrier extends Ship
 {
     public Carrier(){
-        super(5);
+        super(5, new ShipPart());
     }
 
     @Override

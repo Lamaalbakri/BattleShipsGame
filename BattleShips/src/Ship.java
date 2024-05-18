@@ -6,17 +6,18 @@ import java.util.List;
  * @author Group 5
  *  Design Patterns Project
  */
-public abstract class Ship
+public abstract class Ship extends Observer
 {
     private final int size;
     private boolean sunk;
     private final List<ShipPart> shipParts;
 
 
-    public Ship(int size){
+    public Ship(int size, ShipPart shipPart){
         this.size = size;
         this.sunk = false;
         this.shipParts = new ArrayList<>();
+        shipPart.attach(this);
     }
 
     public int getSize(){
@@ -30,11 +31,14 @@ public abstract class Ship
             spot.setShipPart(shipPart);
         }
     }
-
-    public void checkShipPartStatus(){
-        if(shipParts.stream().noneMatch(part -> (part.getStatus().equals(ShipPartStatus.ALIVE)))){
+    
+    @Override
+    public void update(){
+        if(shipParts.stream().noneMatch(part -> (part.getStatus() == ShipPart.ALIVE))){
             for(ShipPart part : shipParts){
-                part.markAsSunk();
+                if(part.getStatus() != ShipPart.SUNK){
+                    part.markAsSunk();
+                }
             }
             this.sunk = true;
         }

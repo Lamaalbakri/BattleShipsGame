@@ -6,7 +6,7 @@
 public class Submarine extends Ship
 {
     public Submarine(){
-        super(3);
+        super(3, new ShipPart());
     }
 
     @Override

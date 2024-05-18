@@ -6,7 +6,7 @@
 public class Battleship extends Ship 
 {
     public Battleship(){
-        super(4);
+        super(4, new ShipPart());
     }
 
     @Override

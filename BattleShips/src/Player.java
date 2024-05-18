@@ -45,7 +45,7 @@ public class Player
 
     public void checkPlayerShips(){
         for(Ship ship : ships){
-            ship.checkShipPartStatus();
+            ship.update();
         }
         removeSunkShip();
     }
